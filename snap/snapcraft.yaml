@@ -1,0 +1,35 @@
+name: opencorsairlink
+base: core18
+version: testing
+summary: A status & control utility that interacts with CorsairLink products.
+description: |
+ OpenCorsairLink is a status & control utility that interacts with CorsairLink products.
+
+grade: stable
+confinement: strict
+
+parts:
+  opencorsairlink:
+    plugin: make
+    source: https://github.com/audiohacked/OpenCorsairLink.git
+    source-branch: testing
+    build-packages:
+      - libusb-1.0-0-dev
+      - pkg-config
+    stage-packages:
+      - libusb-1.0-0
+
+
+apps:
+  opencorsairlink:
+    command: usr/local/bin/OpenCorsairLink.elf
+    plugs:
+      - hardware-observe
+      - raw-usb
+
+  oneshot:
+    command: usr/local/bin/OpenCorsairLink.elf --device 0 --led mode=0,colors=0000FF
+    daemon: oneshot
+    plugs:
+      - hardware-observe
+      - raw-usb
