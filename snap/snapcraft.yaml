@@ -19,7 +19,6 @@ parts:
     stage-packages:
       - libusb-1.0-0
 
-
 apps:
   opencorsairlink:
     command: usr/local/bin/OpenCorsairLink.elf
@@ -28,7 +27,7 @@ apps:
       - raw-usb
 
   oneshot:
-    command: usr/local/bin/OpenCorsairLink.elf --device 0 --led mode=0,colors=0000FF
+    command: usr/local/bin/OpenCorsairLink.elf --device 0 --led mode=0,colors=0000FF --fan channel=1,mode=6,temps=40:50:70:90,speeds=20:30:40:50 --pump mode=3
     daemon: oneshot
     plugs:
       - hardware-observe
